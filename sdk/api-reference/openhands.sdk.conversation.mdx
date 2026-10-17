@@ -143,10 +143,13 @@ Send a message to the agent.
 * Parameters:
   * `message` – Either a string (which will be converted to a user message)
     or a Message object
-  * `sender` – Optional identifier of the sender. Can be used to track
-    message origin in multi-agent scenarios. For example, when
-    one agent delegates to another, the sender can be set to
-    identify which agent is sending the message.
+  * `sender` – Optional identifier of the sender in multi-agent scenarios.
+  * `client_message_id` – Optional stable UUID for retrying a send safely.
+    Repeating a send with the same ID and message is idempotent. Reusing
+    the ID for different content is rejected with HTTP 409 by the Agent Server.
+* Returns:
+  * With `client_message_id`, `True` means a new event was added and `False`
+    means the matching event already existed. Without the ID, returns `None`.
 
 #### abstractmethod set_confirmation_policy()
 
@@ -856,10 +859,13 @@ Send a message to the agent.
 * Parameters:
   * `message` – Either a string (which will be converted to a user message)
     or a Message object
-  * `sender` – Optional identifier of the sender. Can be used to track
-    message origin in multi-agent scenarios. For example, when
-    one agent delegates to another, the sender can be set to
-    identify which agent is sending the message.
+  * `sender` – Optional identifier of the sender in multi-agent scenarios.
+  * `client_message_id` – Optional stable UUID for retrying a send safely.
+    Repeating a send with the same ID and message is idempotent. Reusing
+    the ID for different content is rejected with HTTP 409 by the Agent Server.
+* Returns:
+  * With `client_message_id`, `True` means a new event was added and `False`
+    means the matching event already existed. Without the ID, returns `None`.
 
 #### set_confirmation_policy()
 
